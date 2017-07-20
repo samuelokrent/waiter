@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "Up for Grabs",
+  "description": "Donate a meal you no longer need",
+  "version": "1.0",
+
+  "browser_action": {
+   "default_icon": "icon.png",
+   "default_popup": "popup.html",
+   "default_title": "Up for Grabs!"
+  },
+
+  "permissions": ["tabs", "https://mail.google.com/mail/#inbox/*"]
+}
