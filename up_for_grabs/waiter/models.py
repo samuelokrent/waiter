@@ -6,11 +6,14 @@ from django.core.urlresolvers import reverse
 
 # Create your models here.
 
-class Food(models.Model):
-    name = models.CharField(max_length=200)
+class Order(models.Model):
+    description = models.CharField(max_length=512)
+    owner_name = models.CharField(max_length=200)
+    office = models.CharField(max_length=32)
+    arrival_time = models.TimeField('Arrival Time')
 
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('food_edit', kwargs={'pk': self.pk})
+        return reverse('order_edit', kwargs={'pk': self.pk})
