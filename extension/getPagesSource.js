@@ -1,30 +1,22 @@
-function loadLibraries() {
-  /*var jq = document.createElement('script');
-  jq.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js";
-  document.getElementsByTagName('body')[0].appendChild(jq);*/
 
-/*  var gm = document.createElement('script');
-  gm.src = "https://raw.githubusercontent.com/KartikTalwar/gmail.js/master/src/gmail.js";
-  document.getElementsByTagName('body')[0].appendChild(gm); */
-}
+function DOMtoString(document_root) {
 
-function main() {
-  //loadLibraries();
-
-  //var gmail = Gmail();
-  //return gmail.get.user_email();
-
-  console.log("Extension loading...");
-  gmail = new Gmail($);
-  window.gmail = gmail;
-
-gmail.observe.on("load", function() {
-    userEmail = gmail.get.user_email();
-    console.log("Hello, " + userEmail + ". This is your extension talking!");
-});
+    var title = document_root.getElementsByTagName('title')[0].innerHTML;
+    var mail_content = document_root.getElementsByClassName('G3 G2')[0];
+    var email_address = document_root.getElementsByClassName('gb_wb')[0].innerText;
+    window.alert(email_address);
+    var table = mail_content.getElementsByTagName('table')[3];
+    var restaurant = table.getElementsByTagName('p')[1].innerText;
+    window.alert(restaurant);
+    var all_content = table.getElementsByTagName('p')[1].parentNode;
+    var description_table = all_content.childNodes[17];
+    var description = description_table.getElementsByTagName('td')[0].childNodes[0].wholeText;
+    window.alert(description);
+    var html = document_root.getElementsByTagName('title')[0].innerHTML;
+    return html;
 }
 
 chrome.runtime.sendMessage({
     action: "getSource",
-    source: main()
+    source: DOMtoString(document)
 });
