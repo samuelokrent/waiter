@@ -21,7 +21,7 @@ function headerRow() {
 function claimButton(id) {
   return $("<button/>").click(function() {
             claim(id);
-         }).html("Claim");
+         }).html("Claim").addClass("btn").addClass("btn-info");
 }
 
 function tableEntry(order) {
