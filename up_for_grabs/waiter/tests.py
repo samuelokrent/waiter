@@ -36,8 +36,10 @@ class OrderTestCase(TestCase):
 
         order = {
             'description': 'burrito',
+            'email': 'yahor.yuzefovich@cloudera.com',
             'name': 'yahor',
-            'office': 'PA'
+            'office': 'PA',
+            'restaurant': 'In-N-Out'
         }
         self.create_order(c, order)
         
@@ -51,12 +53,14 @@ class OrderTestCase(TestCase):
 
         order = {
             'description': 'burrito',
+            'email': 'yahor.yuzefovich@cloudera.com',
             'name': 'yahor',
-            'office': 'PA'
+            'office': 'PA',
+            'restaurant': 'In-N-Out'
         }
         create_response = self.create_order(c, order)
 
         claim_response = self.claim_order(c, create_response['id'])
 
-        self.assertEqual({'claimed': True}, claim_response)
+        self.assertTrue(claim_response['claimed'])
 
