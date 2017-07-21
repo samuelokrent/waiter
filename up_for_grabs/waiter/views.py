@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
 
 from waiter.models import Order
 
@@ -32,6 +33,7 @@ def order_claim(request, pk):
         claimed = True
     return HttpResponse(json.dumps({'claimed': claimed}), content_type='application/json')
 
+@csrf_exempt
 def order_create(request):
     try:
         order = json.loads(request.body)
