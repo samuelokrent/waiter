@@ -23,7 +23,7 @@ function DOMtoString(document_root) {
     //var office = "Palo Alto";
     var confirm_message = string.concat("Hey ",name,"\nAre you sure you want to donate ",description," from ", restaurant, "?");
     if(window.confirm(confirm_message) == true)  {
-      $.post("https://claimed.localtunnel.me/create", {'office': office, 'name':name, 'description':description,'restaurant':restaurant,'email':email_address} )
+      $.post("https://claimed.localtunnel.me/create", JSON.stringify({'office': office, 'name':name, 'description':description,'restaurant':restaurant,'email':email_address}) )
       .fail(function(response) { console.log(response); });
       
     }
