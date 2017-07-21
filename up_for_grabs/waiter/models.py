@@ -8,9 +8,16 @@ from django.core.urlresolvers import reverse
 
 class Order(models.Model):
     description = models.CharField(max_length=512)
-    owner_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     office = models.CharField(max_length=32)
     arrival_time = models.TimeField('Arrival Time')
+
+    def as_dict(self):
+        return {
+            "description": self.description,
+            "name": self.name,
+            "office": self.office
+        }
 
     def __unicode__(self):
         return self.name
