@@ -1,4 +1,5 @@
 window.orders = [];
+window.firstLoad = true;
 
 function claim(id) {
   api.claim(id, function(data) {
@@ -57,9 +58,13 @@ function findNewOrder(l1, l2) {
 }
 
 function processOrders(orders) {
-  var newOrder = findNewOrder(window.orders, orders);
-  if(newOrder) {
-    notify(newOrder);
+  if(firstLoad) {
+      firstLoad = false;
+  } else {
+    var newOrder = findNewOrder(window.orders, orders);
+    if(newOrder) {
+      notify(newOrder);
+    }
   }
   window.orders = orders;
   console.log("processOrders");
@@ -81,7 +86,7 @@ function notify(order) {
     Notification.requestPermission();
   else {
     var notification = new Notification('Up for grabs!', {
-      icon: 'http://localhost:8000/static/logo.png',
+      icon: 'http://claimed.localtunnel.me/static/logo.png',
       body: "Claim it now: " + order.description
     });
 
