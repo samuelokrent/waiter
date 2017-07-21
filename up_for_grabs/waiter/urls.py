@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^testlist$', views.order_list_json, name='order_list'),
     url(r'^claim/(?P<pk>\d+)$', views.order_claim, name='order_claim'),
     url(r'^create$', views.order_create, name='order_create'),
+    url(r'^create_test$', views.create_test, name='create_test'),
 ]

@@ -5,5 +5,5 @@ api.getOrders = function(cb) {
 }
 
 api.claim = function(id, cb) {
-  $.post("/claim/" + id, {}, cb); 
+  $.get("/claim/" + id, cb); 
 }

@@ -24,6 +24,7 @@ def order_list(request, template_name='orders/order_list.html'):
     return render(request, template_name, data)
 
 def order_claim(request, pk):
+    print "order_claim"
     order = Order.objects.get(pk=pk)
     claimed = False
     if order:
@@ -45,3 +46,16 @@ def order_create(request):
     except Exception as e:
         print('Exception: ', e)
     return HttpResponse(status=500)
+
+def create_test(request):
+    try:
+        o = Order(description="description",
+                name='name',
+                office='office',
+                arrival_time = timezone.now())
+        o.save()
+        return HttpResponse(json.dumps({'id': o.pk}), content_type='application/json')
+    except Exception as e:
+        print('Exception: ', e)
+        return HttpResponse(status=500)
+
