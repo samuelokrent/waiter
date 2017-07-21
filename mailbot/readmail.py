@@ -93,7 +93,7 @@ while(True):
 		
 		GMAIL.users().messages().modify(userId=user_id, id=m_id,body={ 'removeLabelIds': ['UNREAD']}).execute() 
 		
-		r = requests.post("http://localhost:8000/create", data={'office': office, 'name': name, 'description': food, 'restaurant': restaurant, 'email': email})
+		r = requests.post("http://localhost:8000/create", json={'office': office, 'name': name, 'description': food, 'restaurant': restaurant, 'email': email})
 	time.sleep(5)
 			
 		
