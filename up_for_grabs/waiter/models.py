@@ -10,6 +10,8 @@ class Order(models.Model):
     description = models.CharField(max_length=512)
     name = models.CharField(max_length=200)
     office = models.CharField(max_length=32)
+    restaurant = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
     arrival_time = models.TimeField('Arrival Time')
 
     def as_dict(self):
@@ -17,7 +19,9 @@ class Order(models.Model):
             "id": self.pk,
             "description": self.description,
             "name": self.name,
-            "office": self.office
+            "office": self.office,
+            "email": self.email,
+            "restaurant": self.restaurant
         }
 
     def __unicode__(self):

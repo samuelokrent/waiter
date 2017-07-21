@@ -25,8 +25,13 @@ SECRET_KEY = 'nbxpn+d83$c)+s5=(&6e+l+c4y6-tuh2vn)=6q=bipnkb#kgt#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'upforgrabscloudera@gmail.com'
+EMAIL_HOST_PASSWORD = 'upforgrabs'
 
 # Application definition
 

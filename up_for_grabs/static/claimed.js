@@ -1,7 +1,8 @@
 function claim(id) {
   api.claim(id, function(data) {
     if(data.claimed) {
-      alert("Claimed successfully!");
+      alert("Claimed successfully: " + data.name + "'s order of " +
+      data.description + " from " + data.restaurant + "!");
     } else {
       alert("Someone else has claimed this order already.");
     }
@@ -20,12 +21,12 @@ function headerRow() {
 function claimButton(id) {
   return $("<button/>").click(function() {
             claim(id);
-         }).html("Claim");
+         }).html("Claim").addClass("btn").addClass("btn-info");
 }
 
 function tableEntry(order) {
   return $("<tr/>").attr("id", "entry-"+order.id)
-          .append($("<td/>").html(order.name))
+          .append($("<td/>").html(order.restaurant))
           .append($("<td/>").html(order.description))
           .append($("<td/>").append(claimButton(order.id)));
 }
