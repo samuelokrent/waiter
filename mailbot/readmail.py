@@ -1,10 +1,9 @@
 # Importing required libraries
-from apiclient import discovery
-from apiclient import errors
+from googleapiclient import discovery
+from googleapiclient import errors
 from httplib2 import Http
 from oauth2client import file, client, tools
 import base64
-from bs4 import BeautifulSoup
 import re
 import time
 import dateutil.parser as parser
@@ -63,9 +62,7 @@ while(True):
 		part_data = part_body['data'] # fetching data from the body
 		clean_one = part_data.replace("-","+") # decoding from Base64 to UTF-8
 		clean_one = clean_one.replace("_","/") # decoding from Base64 to UTF-8
-		clean_two = base64.b64decode (bytes(clean_one, 'UTF-8')) # decoding from Base64 to UTF-8
-		soup = BeautifulSoup(clean_two , "lxml" )
-		mssg_body = soup.body()
+		clean_two = base64.b64decode (bytes(clean_one)) # decoding from Base64 to UTF-8
 		
 		clean_two = clean_two.decode("utf-8")
 		

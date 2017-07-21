@@ -5,6 +5,7 @@ function claim(id) {
     } else {
       alert("Someone else has claimed this order already.");
     }
+    $("#entry-"+id).remove();
   });
 }
 
@@ -23,7 +24,7 @@ function claimButton(id) {
 }
 
 function tableEntry(order) {
-  return $("<tr/>").id("entry-"+order.id)
+  return $("<tr/>").attr("id", "entry-"+order.id)
           .append($("<td/>").html(order.name))
           .append($("<td/>").html(order.description))
           .append($("<td/>").append(claimButton(order.id)));
