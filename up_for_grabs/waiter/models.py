@@ -14,6 +14,7 @@ class Order(models.Model):
 
     def as_dict(self):
         return {
+            "id": self.pk,
             "description": self.description,
             "name": self.name,
             "office": self.office

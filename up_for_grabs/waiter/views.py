@@ -23,12 +23,13 @@ def order_list(request, template_name='orders/order_list.html'):
     data['object_list'] = orders
     return render(request, template_name, data)
 
-def order_claim(request, pk, template_name='orders/order_confirm_claim.html'):
-    order = get_object_or_404(Order, pk=pk)    
-    if request.method=='POST':
+def order_claim(request, pk):
+    order = Order.objects.get(pk=pk)
+    claimed = False
+    if order:
         order.delete()
-        return redirect('order_list')
-    return render(request, template_name, {'object': order})
+        claimed = True
+    return HttpResponse(json.dumps({'claimed': claimed}), content_type='application/json')
 
 def order_create(request):
     try:
@@ -40,7 +41,7 @@ def order_create(request):
                 office=order['office'],
                 arrival_time = timezone.now())
         o.save()
-        return HttpResponse(status=200)
+        return HttpResponse(json.dumps({'id': o.pk}), content_type='application/json')
     except Exception as e:
-        print(e)
+        print('Exception: ', e)
     return HttpResponse(status=500)
