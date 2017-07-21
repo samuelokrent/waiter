@@ -10,7 +10,7 @@ import json
 from django.utils import timezone
 
 def index(request):
-    return HttpResponse(render_to_string("index.html", context={"value":"there"}))
+    return HttpResponse(render_to_string("index.html"))
 
 def order_list_json(request):
     orders = Order.objects.all()
