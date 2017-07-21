@@ -25,7 +25,7 @@ SECRET_KEY = 'nbxpn+d83$c)+s5=(&6e+l+c4y6-tuh2vn)=6q=bipnkb#kgt#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['claimed.localtunnel.me']
 
 
 # Application definition
