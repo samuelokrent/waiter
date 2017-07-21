@@ -1,3 +1,5 @@
+window.orders = [];
+
 function claim(id) {
   api.claim(id, function(data) {
     if(data.claimed) {
@@ -31,8 +33,36 @@ function tableEntry(order) {
           .append($("<td/>").append(claimButton(order.id)));
 }
 
-function displayOrders(orders) {
-  console.log("displayOrders");
+function findNewOrder(l1, l2) {
+  if(l2.length > l1.length) {
+    return l2[l2.length - 1];
+  } else {
+    for(i = 0; i < l2.length; i++) {
+      order = l2[i];
+      var found = false;
+      for(j = 0; j < l1.length; j++) {
+        if(l1[j].id = order.id) {
+          found = true;
+          break;
+        }
+      }
+      if(!found) {
+        // This order is in l2 but not l1
+        return order;
+      }
+    }
+    // Lists are the same
+    return false;
+  }
+}
+
+function processOrders(orders) {
+  var newOrder = findNewOrder(window.orders, orders);
+  if(newOrder) {
+    notify(newOrder);
+  }
+  window.orders = orders;
+  console.log("processOrders");
   console.log(orders);
   $table = $("#order_table_body");
   $table.empty();
@@ -43,10 +73,31 @@ function displayOrders(orders) {
 }
 
 function refreshOrders() {
-  api.getOrders(displayOrders);
+  api.getOrders(processOrders);
+}
+
+function notify(order) {
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+  else {
+    var notification = new Notification('Up for grabs!', {
+      icon: 'http://localhost:8000/static/logo.png',
+      body: "Claim it now: " + order.description
+    });
+
+  }
+
 }
 
 $(document).ready(function() {
   refreshOrders();
   setInterval(refreshOrders, 5000);
+
+  if (!Notification) {
+    alert('Desktop notifications not available in your browser. Try Chromium.'); 
+    return;
+  }
+
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
 });
