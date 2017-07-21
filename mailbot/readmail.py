@@ -13,7 +13,16 @@ import csv
 import re	
 import requests
 import time
+from sendmail import create_message 
 
+import base64
+from email.mime.audio import MIMEAudio
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import mimetypes
+import os
 # Creating a storage.JSON file with authentication details
 SCOPES = 'https://www.googleapis.com/auth/gmail.modify' # we are using modify and not readonly, as we will be marking the messages Read
 store = file.Storage('storage.json') 
@@ -62,7 +71,7 @@ while(True):
 		part_data = part_body['data'] # fetching data from the body
 		clean_one = part_data.replace("-","+") # decoding from Base64 to UTF-8
 		clean_one = clean_one.replace("_","/") # decoding from Base64 to UTF-8
-		clean_two = base64.b64decode (bytes(clean_one)) # decoding from Base64 to UTF-8
+		clean_two = base64.b64decode (bytes(clean_one, "UTF-8")) # decoding from Base64 to UTF-8
 		
 		clean_two = clean_two.decode("utf-8")
 		
@@ -93,7 +102,13 @@ while(True):
 		
 		GMAIL.users().messages().modify(userId=user_id, id=m_id,body={ 'removeLabelIds': ['UNREAD']}).execute() 
 		
+<<<<<<< HEAD
+		r = requests.post("http://localhost:8000/create", data={'office': office, 'name': name, 'description': food, 'restaurant': restaurant, 'email': email})
+		message_text = "Your food was claimed, thank you!"
+		subject = "Claimed!"
+=======
 		r = requests.post("http://localhost:8000/create", json={'office': office, 'name': name, 'description': food, 'restaurant': restaurant, 'email': email})
+>>>>>>> c2c8f3bfed1918ced6cc66c495dc972d63e64655
 	time.sleep(5)
 			
 		
