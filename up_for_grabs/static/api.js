@@ -5,5 +5,7 @@ api.getOrders = function(cb) {
 }
 
 api.claim = function(id, cb) {
-  $.get("/claim/" + id, cb); 
+  $.post("/claim/" + id, {
+    csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').attr('value')
+  }, cb); 
 }

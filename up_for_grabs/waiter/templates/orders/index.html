@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="/static/claimed.css" />
   </head>
   <body>
+    <!-- 
+      the cross-site request forgery token to be used in POST requests
+      Example:
+      <input type='hidden' name='csrfmiddlewaretoken' value='TOKEN_IS_HERE' />
+    -->
+    {% csrf_token %}
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">

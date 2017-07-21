@@ -9,8 +9,8 @@ from waiter.models import Order
 import json
 from django.utils import timezone
 
-def index(request):
-    return HttpResponse(render_to_string("index.html"))
+def index(request, template_name='orders/index.html'):
+    return render(request, template_name, {})
 
 def order_list_json(request):
     orders = Order.objects.all()
@@ -24,7 +24,7 @@ def order_list(request, template_name='orders/order_list.html'):
     return render(request, template_name, data)
 
 def order_claim(request, pk):
-    print "order_claim"
+    print("order_claim")
     order = Order.objects.get(pk=pk)
     claimed = False
     if order:
