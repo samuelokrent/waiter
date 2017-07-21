@@ -27,8 +27,11 @@ def order_list(request, template_name='orders/order_list.html'):
     data['object_list'] = orders
     return render(request, template_name, data)
 
-def send_email(subject, message, email_to):
-    send_mail(subject, message, settings.EMAIL_HOST_USER, [email_to], fail_silently=False)
+def send_thank_you_email(email_to):
+    subject = 'Thank you!'
+    message = 'The food that you put up-for-grabs has been claimed!'
+    html = open('../mailbot/template_for_owner.html').read()
+    send_mail(subject, message, settings.EMAIL_HOST_USER, [email_to], fail_silently=False, html_message=html)
 
 def order_claim(request, pk):
     print("order_claim: " + str(pk))
@@ -45,7 +48,7 @@ def order_claim(request, pk):
         email = order.email
         order.delete()
         claimed = True
-        send_email("Thank you!", "The food that you put up-for-grabs has been claimed!", email)
+        send_thank_you_email(email)
     return HttpResponse(json.dumps({'claimed': claimed, 'name': name, 'description': description, 'restaurant': restaurant, 'email': email}), content_type='application/json')
 
 @csrf_exempt
