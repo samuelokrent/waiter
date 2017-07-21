@@ -102,13 +102,7 @@ while(True):
 		
 		GMAIL.users().messages().modify(userId=user_id, id=m_id,body={ 'removeLabelIds': ['UNREAD']}).execute() 
 		
-<<<<<<< HEAD
-		r = requests.post("http://localhost:8000/create", data={'office': office, 'name': name, 'description': food, 'restaurant': restaurant, 'email': email})
-		message_text = "Your food was claimed, thank you!"
-		subject = "Claimed!"
-=======
-		r = requests.post("http://localhost:8000/create", json={'office': office, 'name': name, 'description': food, 'restaurant': restaurant, 'email': email})
->>>>>>> c2c8f3bfed1918ced6cc66c495dc972d63e64655
+		r = requests.post("http://claimed.localtunnel.me/create", data={'office': office, 'name': name, 'description': food, 'restaurant': restaurant, 'email': email})
 	time.sleep(5)
 			
 		
